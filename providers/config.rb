@@ -1,7 +1,7 @@
 include Chef::SSH::PathHelpers
 action :add do
   ssh_user = new_resource.user || 'root'
-  ssh_config_path = default_or_user_path(node['ssh']['config_path'], ssh_user)
+  ssh_config_path = default_or_user_path(new_resource.system_config_path, ssh_user)
 
   remove_entry(ssh_config_path, ssh_user)
   add_entry(ssh_config_path, ssh_user)
@@ -10,7 +10,7 @@ end
 
 action :remove do
   ssh_user = new_resource.user || 'root'
-  ssh_config_path = default_or_user_path(node['ssh']['config_path'], ssh_user)
+  ssh_config_path = default_or_user_path(new_resource.system_config_path, ssh_user)
 
   remove_entry(ssh_config_path, ssh_user)
 end
